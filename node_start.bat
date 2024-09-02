@@ -1,0 +1,1 @@
+set path=%path%;D:\DevlopmentTools\node-v20.17.0-win-x64
