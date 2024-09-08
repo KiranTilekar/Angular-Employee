@@ -7,24 +7,52 @@
     <li>Department: {{ item.department }}</li>
     <li>salary: {{ item.salary }}</li>
 </ul> -->
-  
+<!-- ----------------------------------------------------------------------- -->
+<div>
+  <div>
+    Employee Name: <input [(ngModel)]="employee.name">
+
+  </div><br>
+  <div>
+    Employee ID: <input [(ngModel)]="employee.id" type="number">
+  </div><br>
+  <div>
+    Department: <input [(ngModel)]="employee.department">
+  </div><br>
+  <div>
+    Min Salary: <input [(ngModel)]="employee.minSalary" type="number">
+  </div><br>
+  <div>
+    Max Salary: <input [(ngModel)]="employee.maxSalary" type="number">
+  </div><br>
+
+  <button (click)="fetchData()">Fetch Data</button><br><br>
+</div>
 
 <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Salary</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of data">
-      <tr>
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.department}}</td>
-        <td>{{item.salary}}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Salary</th>
+      <th></th> <!-- Filter buttons -->
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of filteredData; let i = index;">
+    <tr>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.department}}</td>
+      <td>{{item.salary}}</td>
+      <td>
+        <button *ngIf="filterActive" (click)="applyFilter('id', item.id.toString())">ID</button>
+        <button *ngIf="filterActive" (click)="applyFilter('name', item.name)">Name</button>
+        <button *ngIf="filterActive" (click)="applyFilter('department', item.department)">Department</button>
+        <button *ngIf="filterActive" (click)="applyFilter('salary', item.salary.toString())">Salary</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="resetFilters()">Reset Filters</button>
